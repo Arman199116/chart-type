@@ -1,12 +1,12 @@
 import { Chart } from 'chart.js';
-import 'chartjs-adapter-moment';
+//import 'chartjs-adapter-moment';
 //import { ChartPluginsOptions } from "@types/chartjs-plugin-crosshair";
 import { CrosshairOptions } from "chartjs-plugin-crosshair";
 //Chart.register(CrosshairOptions);
 
 ////// react-chartjs-2 options //////////////////
 
-export let optionsChartjs_2 = {
+export let optionsChartjs_2 : any = {
     elements: { point: { radius: 0 } } ,
     plugins: {
         crosshair: {

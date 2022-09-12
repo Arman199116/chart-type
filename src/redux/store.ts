@@ -43,7 +43,6 @@ const userState = createSlice({
                     break;
             }
         },
-       
     }
 
 })

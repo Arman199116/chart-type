@@ -5,10 +5,16 @@ import ClipLoader from 'react-spinners/ClipLoader';
 import { createSelector } from 'reselect';
 import getData from "./../data/fetch_data";
 import { DataType } from "./../../model";
-import {optionsChartjs_2} from './graph.ts/options';
+import {optionsChartjs_2} from './graph/options';
 import { useDispatch, connect } from "react-redux";
+import { dataLabel } from "./../data/dataLabel";
 
-const ChartJs : React.FC = () => {
+interface Props {
+    days : number;
+    dayData : DataType;
+}
+
+const ChartJs : React.FC<Props> = ({ days , dayData }) => {
     const [isLoading, setIsloading] = useState<boolean>(false)
     const [data, setData] = useState<any>({
         labels: [],
@@ -21,19 +27,19 @@ const ChartJs : React.FC = () => {
             getData(days).then(value => {
                 let dataObj = dataLabel.addData(value);
                 setData(dataObj);
-                dispatch(changeDays({
-                    type : 'ADDNEWDATA',
-                    data : {
-                        day : days,
-                        value : dataObj
-                    }
-                }))
+                // dispatch(changeDays({
+                //     type : 'ADDNEWDATA',
+                //     data : {
+                //         day : days,
+                //         value : dataObj
+                //     }
+                // }))
             });
         } else {
             setData(dayData);
         }
 
-    },[days, dispatch, dayData]);
+    },[days, dayData]);
     return (
         <div>
             <Line data={data} width='390px' options={optionsChartjs_2} />
@@ -49,7 +55,7 @@ let getChartValue = createSelector([ selectChartData, selectChartDay ], (chartDa
         days : chartDay
     };
 });
-const mapStateToProps = (state) => {
+const mapStateToProps = (state : any) => {
     const {days, dayData} = getChartValue(state);
     return {
         days : days,
