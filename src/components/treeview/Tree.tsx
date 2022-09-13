@@ -12,14 +12,14 @@ const Tree : React.FC<any> = ({ data, toRight }) => {
             {Object.keys(data).map((item) => {
 
                 if (typeof data[item] === 'object' || Array.isArray(data[item])) {
-                    return <li style={{paddingLeft : toRight * 3 + 'px'}} key={Math.random() + toRight}>
+                    return <li style={{paddingLeft : toRight * 2 + 'px'}} key={Math.random() + toRight}>
                                 <span className="caret" onClick={ (e) => handleOpen(e)}>{item}</span>
                                 <ul className="nested">
                                     <Tree data={data[item]} toRight={toRight} />
                                 </ul>
-                            </li>
+                           </li>
                 } else {
-                    return <li style={{paddingLeft : toRight * 8 + 'px'}} key={Math.random() + toRight}>{`${item} : ${data[item]?.toString()}`}</li>
+                    return <li style={{paddingLeft : toRight * 2 + 'px'}} key={Math.random() + toRight}>{`${item} : ${data[item]?.toString()}`}</li>
                 }
 
             })}

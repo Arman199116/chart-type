@@ -11,7 +11,7 @@ const HeaderToolBar = () => {
     const changeDay = (e : any, day : number) => {
         const span = containerRef.current.children;
         for (let i = 0; i < span.length; i++) {
-            span[i].className = " days-span " ;
+            span[i].className = "days-span" ;
         }
         e.currentTarget.className += " active";
         if (coin === 'ethereum') {

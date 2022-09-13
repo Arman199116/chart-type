@@ -1,22 +1,22 @@
 .container {
-	width: 100%;
-  	display: grid;
-	align-items: center;
-	justify-content: center;	
+    width: 100%;
+    display: grid;
+    align-items: center;
+    justify-content: center;    
 }
 
 .loading-board {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     width: 400px;
-	height: 200px;
+    height: 200px;
     text-align: center;
 }
 .chart-container {
-	width: 400px;
-	margin: 5px;
+    width: 400px;
+    margin: 5px;
 }
 
 .select-coin {
@@ -24,8 +24,8 @@
 
 }
 .chart-container-parrent {
-	background-color: #f1f1f1;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: #f1f1f1;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .days-span:hover {
     background-color: #F8FAFD;
@@ -37,7 +37,6 @@
     font-size: 12px;
     border-radius: 8px;
     cursor: pointer;
-	
 }
 
 .active {
@@ -45,10 +44,8 @@
 }
 
 .span-container {
-	
-	display: flex;
-	justify-content: space-between;
-	
+    display: flex;
+    justify-content: space-between;
 }
 
 .span-container2 {
@@ -58,14 +55,13 @@
     border-radius: 8px;
     padding: 5px;
     height: 20px;
-	margin-left: auto;
-	
+    margin-left: auto;
 }
 
 .container-state-tree {
-	background-color: white;
+    background-color: white;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     color: rgb(93, 140, 146);
-	overflow: scroll;
+    overflow: scroll;
     height: 200px;
 }

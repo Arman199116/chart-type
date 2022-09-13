@@ -46,13 +46,11 @@ const userState = createSlice({
                         ...state,
                         coin : action.payload.coin
                     }
-                
                 default:
                     break;
             }
         },
     }
-
 })
 //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
 

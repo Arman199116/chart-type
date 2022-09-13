@@ -6,14 +6,14 @@ import HeaderToolBar from "./components/chart/HeaderToolBar";
 import SelectCoin from './components/SelectCoin/SelectCoin';
 
 const App : React.FC = () : JSX.Element => {
-	return (
-		<div className="container">
-			<HeaderToolBar />
-			<ChartJs />
-			<SelectCoin />
-			<TreeViewList />
-		</div>
-	);
+    return (
+        <div className="container">
+            <HeaderToolBar />
+            <ChartJs />
+            <SelectCoin />
+            <TreeViewList />
+        </div>
+    );
 }
 
 export default App;

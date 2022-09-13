@@ -1,11 +1,11 @@
-import React from "react";
+import React, {useMemo} from "react";
 //import { createSelector } from 'reselect';
-import { selectState } from './../../redux/store'
+import { selectState } from './../../redux/store';
 import {  useSelector } from "react-redux";
 import Tree from "./Tree";
 import './tree.css';
 
-const TreeviewList : React.FC<any> = () => {
+const TreeviewList : React.FC = () => {
 
     let state : any = useSelector(selectState);
 

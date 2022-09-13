@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo} from "react";
+import React, { useEffect, useState, useMemo, useRef} from "react";
 import  "chart.js/auto";
 import { Line } from "react-chartjs-2";
 import type { ChartData, ChartOptions } from 'chart.js';
@@ -19,21 +19,22 @@ interface Props {
 const ChartJs : React.FC<Props> = ({ days , dayData }) => {
     let dispatch = useDispatch();
     let coin : string = useSelector(selectCoin);
+    let ref = useRef<any>({labels: [], datasets: []});
 
-    const [isLoading, setIsloading] = useState<boolean>(false)
+    const [isLoading, setIsloading] = useState<boolean>(false);
     const [data, setData] = useState<any>({
         labels: [],
         datasets: [],
     });
 
     useEffect(() => {
-        setIsloading(true);
-        if (!dayData) {
-            console.log('deydata ', dayData);
-            
+        //setIsloading(true);
+        if (dayData === undefined) {
+
             getData(days, coin).then(value => {
                 let dataObj = dataLabel.addData(value);
-                setData(dataObj);
+                //setData(dataObj);
+                ref.current = dataObj;
                 if (coin === 'ethereum') {
                     console.log(coin);  
                     dispatch(changeDays({
@@ -55,31 +56,34 @@ const ChartJs : React.FC<Props> = ({ days , dayData }) => {
                 }
             });
         } else {
-            setData(dayData);
+            //setData(dayData);
+            ref.current = dayData;
         }
 
     },[days, dayData, dispatch]);
 
     useEffect(() => {
-        setIsloading(false);
-    },[data]);
+       // setIsloading(false);
+    },[ref.current]);
 
     return (
         <div className="chart-container-parrent">
+
             {
-                isLoading && (
+
+                (ref.current.labels.length > 0)  ? (
+                    <div >
+                        <div className="chart-container">
+                            <Line data={ref.current} options={optionsChartjs_2} />
+                        </div>
+                    </div>
+                ) : (
                     <div className="loading-board" >
                         <ClipLoader color={'red'} size={100} />
                         <p>Please wait</p>
                     </div>
                 )
             }
-            <div style={{display: !isLoading ? 'block' : 'none' }}>
-                <div className="chart-container">
-                    <Line data={data} options={optionsChartjs_2} />
-                </div>
-            </div>
-
         </div>
     )
 }

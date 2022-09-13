@@ -1,13 +1,17 @@
 import React from 'react'
-import { useDispatch } from "react-redux";
-import { changeCoin } from "./../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { changeCoin, selectCoin } from "./../../redux/store";
 
 const SelectCoin : React.FC = () => {
     const dispatch = useDispatch();
+    const coin : string = useSelector(selectCoin);
 
     const handleSubmit = (e : any) => {
         e.preventDefault();
-        dispatch(changeCoin({type : 'NEW_COIN', coin : e.target.coins.value}));
+        let value : string = e.target.coins.value;
+        if (value !== coin) {
+            dispatch(changeCoin({type : 'NEW_COIN', coin : value}));
+        }
     }
     return (
         <div className="select-coin">
