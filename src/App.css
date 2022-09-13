@@ -1,38 +1,71 @@
-.App {
-  text-align: center;
+.container {
+	width: 100%;
+  	display: grid;
+	align-items: center;
+	justify-content: center;	
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.loading-board {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+    width: 400px;
+	height: 200px;
+    text-align: center;
+}
+.chart-container {
+	width: 400px;
+	margin: 5px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.select-coin {
+    margin: 20px 0;
+
+}
+.chart-container-parrent {
+	background-color: #f1f1f1;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.days-span:hover {
+    background-color: #F8FAFD;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.days-span {
+    background-color: #f1f1f1;
+    padding: 10px;
+    font-size: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+	
 }
 
-.App-link {
-  color: #61dafb;
+.active {
+    background-color: #F8FAFD;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.span-container {
+	
+	display: flex;
+	justify-content: space-between;
+	
+}
+
+.span-container2 {
+    display: flex;
+    align-items: center;
+    background-color: #EFF2F5;
+    border-radius: 8px;
+    padding: 5px;
+    height: 20px;
+	margin-left: auto;
+	
+}
+
+.container-state-tree {
+	background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    color: rgb(93, 140, 146);
+	overflow: scroll;
+    height: 200px;
 }

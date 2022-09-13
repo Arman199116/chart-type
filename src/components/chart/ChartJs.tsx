@@ -1,13 +1,15 @@
 import React, { useEffect, useState, useMemo} from "react";
 import  "chart.js/auto";
 import { Line } from "react-chartjs-2";
+import type { ChartData, ChartOptions } from 'chart.js';
 import ClipLoader from 'react-spinners/ClipLoader';
 import { createSelector } from 'reselect';
 import getData from "./../data/fetch_data";
 import { DataType } from "./../../model";
-import {optionsChartjs_2} from './graph/options';
-import { useDispatch, connect } from "react-redux";
+import { optionsChartjs_2 } from './graph/options';
+import { useDispatch, connect, useSelector } from "react-redux";
 import { dataLabel } from "./../data/dataLabel";
+import { selectChartCoinDay, selectChartCoinData, changeDays, selectCoin } from "./../../redux/store";
 
 interface Props {
     days : number;
@@ -15,6 +17,9 @@ interface Props {
 }
 
 const ChartJs : React.FC<Props> = ({ days , dayData }) => {
+    let dispatch = useDispatch();
+    let coin : string = useSelector(selectCoin);
+
     const [isLoading, setIsloading] = useState<boolean>(false)
     const [data, setData] = useState<any>({
         labels: [],
@@ -24,31 +29,62 @@ const ChartJs : React.FC<Props> = ({ days , dayData }) => {
     useEffect(() => {
         setIsloading(true);
         if (!dayData) {
-            getData(days).then(value => {
+            console.log('deydata ', dayData);
+            
+            getData(days, coin).then(value => {
                 let dataObj = dataLabel.addData(value);
                 setData(dataObj);
-                // dispatch(changeDays({
-                //     type : 'ADDNEWDATA',
-                //     data : {
-                //         day : days,
-                //         value : dataObj
-                //     }
-                // }))
+                if (coin === 'ethereum') {
+                    console.log(coin);  
+                    dispatch(changeDays({
+                        type : 'ADD_NEW_ETH_DATA',
+                        data : {
+                            day : days,
+                            value : dataObj
+                        }
+                    }));
+                } else {
+                    console.log(coin);
+                    dispatch(changeDays({
+                        type : 'ADD_NEW_DATA',
+                        data : {
+                            day : days,
+                            value : dataObj
+                        }
+                    }));
+                }
             });
         } else {
             setData(dayData);
         }
 
-    },[days, dayData]);
+    },[days, dayData, dispatch]);
+
+    useEffect(() => {
+        setIsloading(false);
+    },[data]);
+
     return (
-        <div>
-            <Line data={data} width='390px' options={optionsChartjs_2} />
+        <div className="chart-container-parrent">
+            {
+                isLoading && (
+                    <div className="loading-board" >
+                        <ClipLoader color={'red'} size={100} />
+                        <p>Please wait</p>
+                    </div>
+                )
+            }
+            <div style={{display: !isLoading ? 'block' : 'none' }}>
+                <div className="chart-container">
+                    <Line data={data} options={optionsChartjs_2} />
+                </div>
+            </div>
+
         </div>
     )
 }
 
-
-let getChartValue = createSelector([ selectChartData, selectChartDay ], (chartData, chartDay) => {
+let getChartValue = createSelector([ selectChartCoinData, selectChartCoinDay ], (chartData, chartDay) => {
     console.log('new chart data');
     return {
         dayData : chartData,

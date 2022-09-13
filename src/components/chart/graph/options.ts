@@ -1,7 +1,7 @@
 import { Chart } from 'chart.js';
-//import 'chartjs-adapter-moment';
+import 'chartjs-adapter-moment';
 //import { ChartPluginsOptions } from "@types/chartjs-plugin-crosshair";
-import { CrosshairOptions } from "chartjs-plugin-crosshair";
+//import { CrosshairOptions } from "@types/chartjs-plugin-crosshair";
 //Chart.register(CrosshairOptions);
 
 ////// react-chartjs-2 options //////////////////
