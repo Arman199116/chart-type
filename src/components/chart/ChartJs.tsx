@@ -19,7 +19,7 @@ interface Props {
 const ChartJs : React.FC<Props> = ({ days , dayData }) => {
     let dispatch = useDispatch();
     let coin : string = useSelector(selectCoin);
-    let ref = useRef<any>({labels: [], datasets: []});
+    //let ref = useRef<any>({labels: [], datasets: []});
 
     const [isLoading, setIsloading] = useState<boolean>(false);
     const [data, setData] = useState<any>({
@@ -28,13 +28,13 @@ const ChartJs : React.FC<Props> = ({ days , dayData }) => {
     });
 
     useEffect(() => {
-        //setIsloading(true);
+        setIsloading(true);
         if (dayData === undefined) {
 
             getData(days, coin).then(value => {
                 let dataObj = dataLabel.addData(value);
-                //setData(dataObj);
-                ref.current = dataObj;
+                setData(dataObj);
+                //ref.current = dataObj;
                 if (coin === 'ethereum') {
                     console.log(coin);  
                     dispatch(changeDays({
@@ -56,25 +56,25 @@ const ChartJs : React.FC<Props> = ({ days , dayData }) => {
                 }
             });
         } else {
-            //setData(dayData);
-            ref.current = dayData;
+            setData(dayData);
+            //ref.current = dayData;
         }
 
     },[days, dayData, dispatch]);
 
     useEffect(() => {
-       // setIsloading(false);
-    },[ref.current]);
+        setIsloading(false);
+    },[data]);
 
     return (
         <div className="chart-container-parrent">
 
             {
 
-                (ref.current.labels.length > 0)  ? (
+                (!isLoading) ? (
                     <div >
                         <div className="chart-container">
-                            <Line data={ref.current} options={optionsChartjs_2} />
+                            <Line data={data} options={optionsChartjs_2} />
                         </div>
                     </div>
                 ) : (

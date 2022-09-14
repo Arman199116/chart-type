@@ -1,13 +1,13 @@
 import React, {useMemo} from "react";
-//import { createSelector } from 'reselect';
+import { createSelector } from 'reselect';
 import { selectState } from './../../redux/store';
-import {  useSelector } from "react-redux";
+import {  useSelector, connect } from "react-redux";
 import Tree from "./Tree";
 import './tree.css';
 
-const TreeviewList : React.FC = () => {
+const TreeviewList : React.FC<any> = ({ state }) => {
 
-    let state : any = useSelector(selectState);
+    //let state : any = useSelector(selectState);
 
     return (
         <div className='container-state-tree'>
@@ -18,13 +18,14 @@ const TreeviewList : React.FC = () => {
         </div>
     )
 }
-// let getState = createSelector([ selectState ], (state) => {
-//     return { stateObj : state }
-// });
-// const mapStateToProps = (state : any) => {
-//     const { stateObj } = getState(state);
-//     return { state : stateObj }
-// }connect(mapStateToProps)
 
-export default React.memo(TreeviewList);
+let getState = createSelector([ selectState ], (state) => {
+    return { stateObj : state }
+});
+const mapStateToProps = (state : any) => {
+    const { stateObj } = getState(state);
+    return { state : stateObj }
+}
+
+export default connect(mapStateToProps)(TreeviewList);
 

@@ -52,7 +52,7 @@ const userState = createSlice({
         },
     }
 })
-//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
+//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
 
 export const selectChartCoinDay = (state : any) => { 
     if (state.coin === 'ethereum') {
