@@ -8,12 +8,13 @@ import './tree.css';
 const TreeviewList : React.FC<any> = ({ state }) => {
 
     //let state : any = useSelector(selectState);
+    let t = useMemo(() => <Tree data = {{State : state}} toRight={0}/>, [state]);
 
     return (
         <div className='container-state-tree'>
             <h3>State data</h3>
             <ul id="myUL">
-                <Tree data = {{State : state}} toRight={0}/>
+                {t}
             </ul>
         </div>
     )

@@ -51,7 +51,7 @@ export let optionsChartjs_2 : any = {
             distribution: "linear",
 
             time: {
-                parser: "dd/mm/yyyy",    
+               // parser: "dd/mm/yyyy",    
             },
             ticks: {
                 autoSkip: false,

@@ -2,7 +2,7 @@ import { DataType } from "./../../model";
 
 export const dataLabel = {
     addData: function (val : DataType) {
-        let data : any = [];
+        let data : number[] = [];
         return {
             labels: val.prices.map((price : any) => { data.push(price[1] / 1000); return price[0] }),
             datasets: [{
