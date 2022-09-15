@@ -9,3 +9,9 @@ export type DataType = {
         Array<number>[]
     ],
 }
+
+export interface ArrType {
+    key : number,
+    span : string,
+    ul : string
+}

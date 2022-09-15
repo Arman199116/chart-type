@@ -1,35 +1,33 @@
 import React, { useCallback, useMemo, ChangeEvent } from 'react';
+import { ArrType } from "./../../model";
+
 
 const Tree : React.FC<any> = ({ data, toRight }) => {
 
     let handleOpen = (e : any) => {
-
-        console.log( 
-            typeof e
-         );
         e.stopPropagation();
         e.target.parentElement.querySelector(".nested").classList.toggle("active");
         e.target.classList.toggle("caret-down");
-    }
-    let arr : any = [];
-    let tree = useMemo(() => (data : any, toRight : number) => {
-        toRight++;
-        arr.push({'key' : Math.random() + toRight, 'span' : "caret", 'ul' : 'nested'});
 
+    }
+    let arr : ArrType[] = [];
+    let tree = (data : any, toRight : number, ind : number) => {
+        toRight++;
         return (
             Object.keys(data).map((item) => {
 
                 if (typeof data[item] === 'object' || Array.isArray(data[item])) {
+                    arr.push({'key' : Math.random() + toRight, 'span' : "caret", 'ul' : 'nested'});
                     return <li style={{paddingLeft : toRight * 2 + 'px'}} key={Math.random() + toRight}>
                                 <span className="caret" onClick={(e) => {
-                                    let {span , ul} = arr[toRight - 1];
-                                    arr[toRight - 1] = {...arr[toRight - 1], span : span === 'caret' ? 'caret caret-down' : 'caret' , ul : ul === 'nested' ? 'nested active' : 'nested'};
-                                    localStorage.setItem('class', JSON.stringify(arr)); 
+                                    //let {span , ul} = arr[ind ];
+                                    arr[ind] = {...arr[ind], span : 'caret caret-down' , ul : 'nested actice'};
+                                    localStorage.setItem('class', JSON.stringify(arr));
                                     handleOpen(e);
                                 }}
                                 >{item}</span>
                                 <ul className="nested">
-                                    {tree(data[item], toRight)}
+                                    {tree(data[item], toRight, ind++)}
                                 </ul>
                            </li>
                 } else {
@@ -38,12 +36,12 @@ const Tree : React.FC<any> = ({ data, toRight }) => {
 
             })
         )
-    },[]);
+    };
     
     return (
         <>
             {
-                tree(data, 0)
+                tree(data, 0, 0)
             }
         </>
     )
