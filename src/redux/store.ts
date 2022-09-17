@@ -6,9 +6,9 @@ const userState = createSlice({
 
     initialState : {
         coin : 'bitcoin',
+        dayName : '1D',
         chartDay : 1,
         chartData : {},
-        chartEthDay : 1,
         chartEthData : {}
     },
 
@@ -18,17 +18,13 @@ const userState = createSlice({
                 case 'CHANGE_DAYS':
                     return {
                         ...state,
-                        chartDay : action.payload.chartDay
+                        chartDay : action.payload.chart.chartDay,
+                        dayName : action.payload.chart.dayName,
                     }
                 case 'ADD_NEW_DATA':
                     return {
                         ...state,
                         chartData : {...state.chartData, [action.payload.data.day] : action.payload.data.value }
-                    }
-                case 'CHANGE_ETH_DAYS':
-                    return {
-                        ...state,
-                        chartEthDay : action.payload.chartDay
                     }
                 case 'ADD_NEW_ETH_DATA':
                     return {
@@ -54,16 +50,10 @@ const userState = createSlice({
 })
 //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
 
-export const selectChartCoinDay = (state : any) => { 
-    if (state.coin === 'ethereum') {
-        return state.chartEthDay;
-    } else {
-        return state.chartDay;
-    }
-};
+export const selectChartCoinDay = (state : any) => state.chartDay;
 export const selectChartCoinData = (state : any) => {
     if (state.coin === 'ethereum') {
-        return state.chartEthData[state.chartEthDay];
+        return state.chartEthData[state.chartDay];
     } else {
         return state.chartData[state.chartDay];
     }

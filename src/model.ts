@@ -1,3 +1,4 @@
+
 export type DataType = {
     market_caps: [
         Array<number>[]
@@ -9,3 +10,14 @@ export type DataType = {
         Array<number>[]
     ],
 }
+
+export interface Props {
+    days : number;
+    dayData : DataType;
+}
+
+export interface Day {
+    day : number | string
+}
+
+export type Item = number | string;
