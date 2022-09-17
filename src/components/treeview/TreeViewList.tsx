@@ -1,20 +1,17 @@
-import React, {useMemo} from "react";
+import React from "react";
 import { createSelector } from 'reselect';
 import { selectState } from './../../redux/store';
-import {  useSelector, connect } from "react-redux";
+import { connect } from "react-redux";
 import Tree from "./Tree";
 import './tree.css';
 
 const TreeviewList : React.FC<any> = ({ state }) => {
 
-    //let state : any = useSelector(selectState);
-    let t = useMemo(() => <Tree data = {{State : state}} toRight={0}/>, [state]);
-
     return (
         <div className='container-state-tree'>
             <h3>State data</h3>
             <ul id="myUL">
-                {t}
+                <Tree data = {{State : state}} />
             </ul>
         </div>
     )
