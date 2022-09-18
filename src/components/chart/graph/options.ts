@@ -31,7 +31,7 @@ export let optionsChartjs_2 : any = {
                     return ' Price $' + chart.formattedValue 
                 },
                 labelColor: function(chart : any) {
-                    return {   
+                    return {
                         backgroundColor: '#16C784',
                         borderWidth: 3,
                         borderRadius: 5,
@@ -51,7 +51,7 @@ export let optionsChartjs_2 : any = {
             distribution: "linear",
 
             time: {
-               // parser: "dd/mm/yyyy",    
+                parser: "dd/mm/yyyy",    
             },
             ticks: {
                 autoSkip: false,

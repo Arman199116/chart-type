@@ -4,19 +4,19 @@ import { Line } from "react-chartjs-2";
 import ClipLoader from 'react-spinners/ClipLoader';
 import { createSelector } from 'reselect';
 import getData from "./../data/fetch_data";
-import { Props } from "./../../model";
+import { Props, StateDataType, InitialStateType } from "./../../model";
 import { optionsChartjs_2 } from './graph/options';
 import { useDispatch, connect, useSelector } from "react-redux";
-import { dataLabel } from "./../data/dataLabel";
+import { addData } from "./../data/dataLabel";
 import { selectChartCoinDay, selectChartCoinData, changeDays, selectCoin } from "./../../redux/store";
 
 
-const ChartJs : React.FC<Props> = ({ days , dayData }) => {
+const ChartJs : React.FC<Props> = ({ days , dayData }) : JSX.Element => {
     let dispatch = useDispatch();
     let coin : string = useSelector(selectCoin);
 
     const [isLoading, setIsloading] = useState<boolean>(false);
-    const [data, setData] = useState<any>({
+    const [data, setData] = useState<StateDataType>({
         labels: [],
         datasets: [],
     });
@@ -26,7 +26,7 @@ const ChartJs : React.FC<Props> = ({ days , dayData }) => {
         if (dayData === undefined) {
 
             getData(days, coin).then(value => {
-                let dataObj = dataLabel.addData(value);
+                let dataObj : StateDataType = addData(value);
                 setData(dataObj);
                 if (coin === 'ethereum') {
                     dispatch(changeDays({
@@ -83,7 +83,7 @@ let getChartValue = createSelector([ selectChartCoinData, selectChartCoinDay ], 
         days : chartDay
     };
 });
-const mapStateToProps = (state : any) => {
+const mapStateToProps = (state : InitialStateType) => {
     const {days, dayData} = getChartValue(state);
     return {
         days : days,
@@ -91,4 +91,4 @@ const mapStateToProps = (state : any) => {
     }
 }
 
-export default connect(mapStateToProps)(ChartJs)
+export default connect(mapStateToProps)<any>(ChartJs)

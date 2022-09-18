@@ -1,11 +1,13 @@
-import React, { useCallback, useMemo, ChangeEvent } from 'react';
+import React from 'react';
+import { TreeviewType } from '../../model';
 
-const Tree : React.FC<any> = ({ data }) => {
+const Tree : React.FC<TreeviewType> = ({ data }) => {
 
-    let handleOpen = (e : any) => {
+    let handleOpen = (e : React.MouseEvent) : void => {
+        const clickedEl = e.target as HTMLSpanElement;
         e.stopPropagation();
-        e.target.parentElement.querySelector(".nested").classList.toggle("active");
-        e.target.classList.toggle("caret-down");
+        clickedEl.parentElement?.querySelector(".nested")?.classList.toggle("active");
+        clickedEl.classList.toggle("caret-down");
     }
 
     let tree = (data : any, toRight : number, ind : number) => {

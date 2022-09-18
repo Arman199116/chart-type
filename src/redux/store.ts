@@ -1,4 +1,5 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
+import { InitialStateType } from '../model';
 //import { current } from '@reduxjs/toolkit'
 
 const userState = createSlice({
@@ -50,8 +51,8 @@ const userState = createSlice({
 })
 //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
 
-export const selectChartCoinDay = (state : any) => state.chartDay;
-export const selectChartCoinData = (state : any) => {
+export const selectChartCoinDay = (state : InitialStateType) => state.chartDay;
+export const selectChartCoinData = (state : InitialStateType ) => {
     if (state.coin === 'ethereum') {
         return state.chartEthData[state.chartDay];
     } else {
@@ -59,8 +60,8 @@ export const selectChartCoinData = (state : any) => {
     }
 
 };
-export const selectState = (state : any) => state;
-export const selectCoin = (state : any) => state.coin;
+export const selectState = (state : InitialStateType) => state;
+export const selectCoin = (state : InitialStateType) => state.coin;
 export const { changeDays, changeCoin } = userState.actions;
 const store = configureStore({
     reducer : userState.reducer,

@@ -4,8 +4,9 @@ import { selectState } from './../../redux/store';
 import { connect } from "react-redux";
 import Tree from "./Tree";
 import './tree.css';
+import { InitialStateType, TreeviewListType } from "../../model";
 
-const TreeviewList : React.FC<any> = ({ state }) => {
+const TreeviewList : React.FC<TreeviewListType> = ({ state }) => {
 
     return (
         <div className='container-state-tree'>
@@ -17,10 +18,10 @@ const TreeviewList : React.FC<any> = ({ state }) => {
     )
 }
 
-let getState = createSelector([ selectState ], (state) => {
+let getState = createSelector([ selectState ], (state ) => {
     return { stateObj : state }
 });
-const mapStateToProps = (state : any) => {
+const mapStateToProps = (state : InitialStateType) => {
     const { stateObj } = getState(state);
     return { state : stateObj }
 }

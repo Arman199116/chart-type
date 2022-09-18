@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Day, Item } from '../../model';
 import { changeDays } from "./../../redux/store";
 
-const HeaderToolBar : React.FC<any> = () => {
+const HeaderToolBar : React.FC = () => {
     const dispatch = useDispatch();
     const containerRef = useRef<HTMLDivElement>(null);
 
@@ -16,15 +16,15 @@ const HeaderToolBar : React.FC<any> = () => {
         ['YTD', 185, 'days-span'],
         ['All', 'max', 'days-span'],
     ];
-    const changeDay = (e : any, day : Day, dayName : string) => {
-
+    const changeDay = (e : React.MouseEvent, day : Day, dayName : string) => {
+        const clickedEl = e.target as HTMLSpanElement;
         dispatch(changeDays({type : 'CHANGE_DAYS', chart : {chartDay : day, dayName : dayName}}));
 
         const span = containerRef.current!.children;
         for (let i = 0; i < span.length; i++) {
-            span[i].className = "days-span" ;
+            span[i].className = "days-span";
         }
-        e.target.classList.toggle('active');
+        clickedEl.classList.toggle('active');
     }
 
     return (
@@ -33,7 +33,7 @@ const HeaderToolBar : React.FC<any> = () => {
                 {
                     dayContainer.map((item : any , i : number) => {
                         return (
-                            <span key={i} className={ item[2] }  onClick={ e => changeDay(e, item[1], item[0])}>{item[0]}</span>
+                            <span key={i} className={ item[2] } onClick={ e => changeDay(e, item[1], item[0])}>{item[0]}</span>
                         )
                     })
                 }

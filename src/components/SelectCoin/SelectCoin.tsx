@@ -6,9 +6,10 @@ const SelectCoin : React.FC = () => {
     const dispatch = useDispatch();
     const coin : string = useSelector(selectCoin);
 
-    const handleSubmit = (e : any) => {
+    const handleSubmit = (e : React.SyntheticEvent) => {
+        let targetEl = e.target as HTMLFormElement;
         e.preventDefault();
-        let value : string = e.target.coins.value;
+        let value : string = targetEl.coins.value;
         if (value !== coin) {
             dispatch(changeCoin({type : 'NEW_COIN', coin : value}));
         }
@@ -16,7 +17,7 @@ const SelectCoin : React.FC = () => {
     return (
         <div className="select-coin">
             <form onSubmit={ e => handleSubmit(e)} >
-                <label >Choose a Coin:</label>
+                <label >Choose a Coin: </label>
                 <select name="coins" id="coins">
                     <option value="bitcoin">Bitcoin</option>
                     <option value="ethereum">Ethereum</option>

@@ -1,4 +1,4 @@
-import {DataType} from '../../model';
+import { DataType } from '../../model';
 
 const getData = async (days : number, coin : string ) => {
     var options : any = {
